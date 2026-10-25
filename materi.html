@@ -30,8 +30,19 @@
         .btn-home { background-color: var(--accent-color); color: var(--text-dark); }
 
         section { padding: 40px 20px; max-width: 1000px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 2rem; color: var(--primary-color); margin-bottom: 40px; position: relative; }
+        .section-title { text-align: center; font-size: 2rem; color: var(--primary-color); margin-bottom: 20px; position: relative; }
         .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: var(--secondary-color); margin: 10px auto 0; border-radius: 2px; }
+
+        /* Style untuk Gambar Ilustrasi */
+        .illustration-img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 20px auto 40px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 4px solid white;
+        }
 
         .materi-container { display: flex; flex-direction: column; gap: 40px; }
         .materi-block { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--primary-color); }
@@ -107,6 +118,11 @@
 
     <section>
         <h2 class="section-title">Materi Pembelajaran</h2>
+        
+        <!-- GAMBAR ILUSTRASI PENGINDERAAN JAUH -->
+        <a href="https://ibb.co.com/qMPhkxG6">
+            <img src="https://i.ibb.co.com/XZv6SVBH/Penginderaan-Jauh.webp" alt="Ilustrasi Sistem Penginderaan Jauh" class="illustration-img">
+        </a>
         
         <div class="materi-container">
             <!-- A. PENGINDERAAN JAUH -->
