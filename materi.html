@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Geografi - Penginderaan Jauh & SIG</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #2ecc71;
+            --accent-color: #f1c40f;
+            --danger-color: #e74c3c;
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --bg-light: #f4f7f6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        
+        header { background: linear-gradient(135deg, var(--primary-color), #134b61); color: var(--text-light); padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .logo-section { display: flex; align-items: center; gap: 15px; }
+        .logo-section img { height: 50px; width: auto; border-radius: 50%; background: white; padding: 3px; }
+        .logo-section h1 { font-size: 1.2rem; font-weight: 700; }
+        nav ul { display: flex; list-style: none; gap: 15px; }
+        nav a { color: var(--text-light); text-decoration: none; font-weight: 600; padding: 8px 16px; border-radius: 20px; transition: all 0.3s ease; font-size: 0.9rem; }
+        nav a:hover { background-color: var(--secondary-color); color: white; }
+        .btn-home { background-color: var(--accent-color); color: var(--text-dark); }
+
+        section { padding: 40px 20px; max-width: 1000px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2rem; color: var(--primary-color); margin-bottom: 40px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: var(--secondary-color); margin: 10px auto 0; border-radius: 2px; }
+
+        .materi-container { display: flex; flex-direction: column; gap: 40px; }
+        .materi-block { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--primary-color); }
+        .materi-block.sig { border-left-color: var(--secondary-color); }
+        .materi-block h3 { color: var(--primary-color); font-size: 1.6rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .materi-block.sig h3 { color: #27ae60; }
+
+        .definition-box { background: #e8f4f8; padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary-color); margin-bottom: 25px; font-style: italic; }
+        .component-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .component-item { background: #f8f9fa; padding: 15px; border-radius: 8px; display: flex; align-items: flex-start; gap: 10px; }
+        .component-item i { color: var(--primary-color); margin-top: 3px; }
+        .component-item strong { display: block; color: var(--text-dark); }
+
+        .hafal-badge { display: inline-block; background: var(--danger-color); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        .unsur-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .unsur-item { background: #fff5f5; border: 1px solid #fed7d7; padding: 15px; border-radius: 8px; }
+        .unsur-item strong { color: #c53030; display: block; margin-bottom: 5px; }
+
+        .manfaat-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .manfaat-list li { background: #f0fff4; padding: 10px 15px; border-radius: 8px; display: flex; align-items: center; gap: 10px; color: #276749; }
+
+        .workflow { display: flex; justify-content: space-between; align-items: center; background: #edf2f7; padding: 20px; border-radius: 10px; margin: 20px 0; flex-wrap: wrap; gap: 10px; }
+        .workflow-step { background: var(--primary-color); color: white; padding: 10px 20px; border-radius: 8px; font-weight: 600; text-align: center; flex: 1; min-width: 120px; }
+        .workflow-arrow { color: var(--accent-color); font-size: 1.5rem; }
+
+        .data-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .data-box { padding: 20px; border-radius: 10px; text-align: center; }
+        .data-box.raster { background: #ebf8ff; border: 2px solid #90cdf4; }
+        .data-box.vektor { background: #f0fff4; border: 2px solid #9ae6b4; }
+        .data-box h4 { margin-bottom: 10px; color: var(--text-dark); }
+
+        .latihan-section { text-align: center; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; padding: 40px; border-radius: 15px; margin-top: 20px; }
+        .latihan-section h3 { color: white; border: none; justify-content: center; }
+        .btn-latihan { display: inline-flex; align-items: center; gap: 10px; background: var(--accent-color); color: var(--text-dark); padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.1rem; margin-top: 20px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .btn-latihan:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+        footer { background-color: var(--text-dark); color: var(--text-light); text-align: center; padding: 30px 20px; margin-top: 60px; }
+        footer .teacher-info h4 { color: var(--secondary-color); font-size: 1.1rem; margin-bottom: 10px; }
+        footer p { margin: 5px 0; font-size: 0.85rem; opacity: 0.8; }
+
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; text-align: center; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            .data-comparison { grid-template-columns: 1fr; }
+            .workflow { flex-direction: column; }
+            .workflow-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <a href="index.html">
+                    <img src="https://i.ibb.co.com/xqDDJgz3/SMAN1-Cluring-emblem.png" alt="SMAN1-Cluring-emblem">
+                </a>
+                <div>
+                    <h1>SMAN 1 Cluring</h1>
+                    <p>Materi Geografi</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="btn-home"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li><a href="https://docs.google.com/spreadsheets/d/1EE1M6-p6HG1P_a-RPX_u4zUJdBJj7DRTbGSuYTWVxzI/edit?usp=sharing" target="_blank">Rekap Absensi</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section>
+        <h2 class="section-title">Materi Pembelajaran</h2>
+        
+        <div class="materi-container">
+            <!-- A. PENGINDERAAN JAUH -->
+            <div class="materi-block">
+                <h3><i class="fas fa-satellite"></i> A. Penginderaan Jauh (PJ)</h3>
+                <div class="definition-box">
+                    <strong>Pengertian:</strong> Ilmu dan seni untuk memperoleh informasi tentang objek, daerah, atau gejala dengan cara menganalisis data yang diperoleh <em>tanpa kontak langsung</em> terhadap objek tersebut (Lillesand & Kiefer).
+                </div>
+
+                <h4 style="margin-bottom: 15px; color: var(--primary-color);">Komponen Penginderaan Jauh</h4>
+                <div class="component-grid">
+                    <div class="component-item"><i class="fas fa-sun"></i> <div><strong>Sumber Tenaga:</strong> Matahari (pasif) & buatan/aktif (radar)</div></div>
+                    <div class="component-item"><i class="fas fa-cloud"></i> <div><strong>Atmosfer:</strong> Harus ada "jendela atmosfer". Jika tertutup awan, data tidak terekam.</div></div>
+                    <div class="component-item"><i class="fas fa-mountain"></i> <div><strong>Objek:</strong> Apa yang direkam (gunung, hutan, kota).</div></div>
+                    <div class="component-item"><i class="fas fa-camera"></i> <div><strong>Sensor:</strong> Alat perekam (kamera untuk foto udara, radiometer untuk citra satelit).</div></div>
+                    <div class="component-item"><i class="fas fa-plane"></i> <div><strong>Wahana:</strong> Kendaraan pembawa sensor (pesawat, satelit, balon udara).</div></div>
+                    <div class="component-item"><i class="fas fa-file-image"></i> <div><strong>Perolehan Data:</strong> Hasil perekaman berupa foto udara / citra.</div></div>
+                    <div class="component-item"><i class="fas fa-user-tie"></i> <div><strong>Pengguna:</strong> Interpreter yang mengolah dan menganalisis data.</div></div>
+                </div>
+
+                <h4 style="margin-bottom: 15px; color: var(--primary-color);">Jenis-jenis Citra</h4>
+                <div class="data-comparison" style="margin-bottom: 25px;">
+                    <div class="data-box raster">
+                        <h4><i class="fas fa-plane-departure"></i> Foto Udara</h4>
+                        <p style="font-size: 0.9rem;">Dari pesawat. Liputan sempit, detail sangat jelas, skala besar. <br><em>Contoh: Peta desa.</em></p>
+                    </div>
+                    <div class="data-box vektor">
+                        <h4><i class="fas fa-satellite-dish"></i> Citra Satelit</h4>
+                        <p style="font-size: 0.9rem;">Dari satelit. Liputan sangat luas, bisa merekam yang tidak terlihat mata. <br><em>Contoh: Landsat, Sentinel, Google Earth.</em></p>
+                    </div>
+                </div>
+
+                <div class="hafal-badge"><i class="fas fa-exclamation-triangle"></i> WAJIB HAFAL SISWA (Kunci Ujian!)</div>
+                <h4 style="margin-bottom: 15px; color: var(--primary-color);">8 Unsur Interpretasi Citra</h4>
+                <div class="unsur-grid">
+                    <div class="unsur-item"><strong>1. Rona/Warna</strong>Tingkat kecerahan. <em>(Hutan = gelap, Pasir = cerah)</em></div>
+                    <div class="unsur-item"><strong>2. Bentuk</strong>Bentuk objek. <em>(Persegi panjang = gedung sekolah)</em></div>
+                    <div class="unsur-item"><strong>3. Ukuran</strong>Luas objek. <em>(Lapangan bola > rumah)</em></div>
+                    <div class="unsur-item"><strong>4. Tekstur</strong>Kasar/halus. <em>(Hutan = kasar, Sawah = halus)</em></div>
+                    <div class="unsur-item"><strong>5. Pola</strong>Susunan objek. <em>(Teratur = kebun sawit, Tidak teratur = hutan alami)</em></div>
+                    <div class="unsur-item"><strong>6. Bayangan</strong>Untuk mengetahui tinggi objek. <em>(Bayangan tower tinggi)</em></div>
+                    <div class="unsur-item"><strong>7. Situs</strong>Letak objek terhadap sekitarnya. <em>(Tambak di tepi pantai)</em></div>
+                    <div class="unsur-item"><strong>8. Asosiasi</strong>Keterkaitan objek. <em>(Ada perahu = dekat laut/sungai)</em></div>
+                </div>
+
+                <h4 style="margin-bottom: 15px; color: var(--primary-color);">Manfaat Penginderaan Jauh</h4>
+                <ul class="manfaat-list">
+                    <li><i class="fas fa-tree"></i> Kehutanan: Hitung luas, pantau deforestasi</li>
+                    <li><i class="fas fa-seedling"></i> Pertanian: Prediksi hasil panen</li>
+                    <li><i class="fas fa-water"></i> Kelautan: Pantau suhu laut, lokasi ikan</li>
+                    <li><i class="fas fa-exclamation-circle"></i> Bencana: Pantau banjir, gunung meletus, hotspot</li>
+                    <li><i class="fas fa-city"></i> Perencanaan: Tata ruang kota</li>
+                </ul>
+            </div>
+
+            <!-- B. SISTEM INFORMASI GEOGRAFI -->
+            <div class="materi-block sig">
+                <h3><i class="fas fa-map-marked-alt"></i> B. Sistem Informasi Geografis (SIG)</h3>
+                <div class="definition-box" style="background: #f0fff4; border-left-color: var(--secondary-color);">
+                    <strong>Pengertian:</strong> Sistem komputer yang digunakan untuk memasukkan, menyimpan, mengolah, menganalisis, dan menghasilkan data bereferensi geografis (data yang punya lokasi di peta).
+                </div>
+
+                <h4 style="margin-bottom: 15px; color: #27ae60;">4 Komponen SIG</h4>
+                <div class="component-grid">
+                    <div class="component-item"><i class="fas fa-laptop" style="color: #27ae60;"></i> <div><strong>Hardware:</strong> Komputer, GPS, printer, scanner</div></div>
+                    <div class="component-item"><i class="fas fa-compact-disc" style="color: #27ae60;"></i> <div><strong>Software:</strong> ArcGIS, QGIS, ArcView</div></div>
+                    <div class="component-item"><i class="fas fa-user-cog" style="color: #27ae60;"></i> <div><strong>Brainware:</strong> Operator, analis SIG <span style="color:red; font-weight:bold;">(TERPENTING)</span></div></div>
+                    <div class="component-item"><i class="fas fa-database" style="color: #27ae60;"></i> <div><strong>Data:</strong> Spasial (peta/koordinat) & Atribut (keterangan)</div></div>
+                </div>
+
+                <h4 style="margin-bottom: 15px; color: #27ae60;">Tahapan Kerja SIG</h4>
+                <div class="workflow">
+                    <div class="workflow-step">INPUT<br><small style="font-weight:400; font-size:0.8rem">Digitasi, Scanning, GPS</small></div>
+                    <i class="fas fa-arrow-right workflow-arrow"></i>
+                    <div class="workflow-step">MANAJEMEN<br><small style="font-weight:400; font-size:0.8rem">Penyimpanan Data</small></div>
+                    <i class="fas fa-arrow-right workflow-arrow"></i>
+                    <div class="workflow-step">ANALISIS<br><small style="font-weight:400; font-size:0.8rem">Overlay & Buffering</small></div>
+                    <i class="fas fa-arrow-right workflow-arrow"></i>
+                    <div class="workflow-step">OUTPUT<br><small style="font-weight:400; font-size:0.8rem">Peta, Tabel, Grafik</small></div>
+                </div>
+
+                <h4 style="margin-bottom: 15px; color: #27ae60;">Jenis Data SIG</h4>
+                <div class="data-comparison">
+                    <div class="data-box raster">
+                        <h4><i class="fas fa-th"></i> Data Raster</h4>
+                        <p style="font-size: 0.9rem;">Berbentuk pixel/kotak-kotak.<br><em>Contoh: Foto udara, citra satelit.</em></p>
+                    </div>
+                    <div class="data-box vektor">
+                        <h4><i class="fas fa-draw-polygon"></i> Data Vektor</h4>
+                        <p style="font-size: 0.9rem;">Berbentuk titik, garis, poligon.<br><em>Contoh: Titik (sekolah), Garis (jalan), Poligon (batas desa).</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LATIHAN SOAL -->
+            <div class="latihan-section">
+                <h3><i class="fas fa-pencil-alt"></i> Uji Pemahamanmu!</h3>
+                <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">Sudah membaca materi di atas? Ayo uji pemahamanmu tentang Penginderaan Jauh dan SIG melalui kuis interaktif berikut ini.</p>
+                <a href="https://forms.gle/UhRV4GQZhhZRCnRf6" target="_blank" class="btn-latihan">
+                    <i class="fas fa-clipboard-list"></i> Kerjakan Latihan Soal PJ & SIG
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="teacher-info">
+            <h4>Titin Nursanti, S.Pd.</h4>
+            <p>Guru Mata Pelajaran Geografi</p>
+            <p><i class="fas fa-school"></i> SMAN 1 Cluring, Banyuwangi, Jawa Timur</p>
+            <p><i class="fas fa-envelope"></i> titinazwa@gmail.com</p>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.8rem;">&copy; 2026 Portal Geografi SMAN 1 Cluring. Hak Cipta Dilindungi.</p>
+    </footer>
+
+</body>
+</html>
